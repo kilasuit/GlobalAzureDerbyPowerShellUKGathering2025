@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Global Event Time Tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg-light: #ffffff;
+      --bg-dark: #1e1e1e;
+      --text-light: #000000;
+      --text-dark: #ffffff;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.dark-mode {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    header {
+      padding: 1em;
+      text-align: center;
+    }
+
+    .toggle-container {
+      text-align: center;
+      margin-bottom: 1em;
+    }
+
+    .toggle-container button {
+      padding: 0.5em 1em;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    .view-toggle {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1em;
+    }
+
+    .view-toggle button {
+      margin: 0 0.5em;
+      padding: 0.5em 1em;
+      cursor: pointer;
+    }
+
+    .content {
+      display: none;
+      padding: 1em;
+    }
+
+    .content.active {
+      display: block;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1em;
+    }
+
+    .card {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 1em;
+      background-color: inherit;
+      color: inherit;
+    }
+
+    .card h3 {
+      margin-top: 0;
+    }
+
+    .map-container {
+      width: 100%;
+      height: 500px;
+    }
+
+    .event-timer {
+      text-align: center;
+      margin-bottom: 1em;
+      font-size: 1.2em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Global Event Time Tracker</h1>
+    <div class="event-timer" id="event-timer">Calculating event time...</div>
+  </header>
+
+  <div class="toggle-container">
+    <button id="theme-toggle">Toggle Dark/Light Mode</button>
+  </div>
+
+  <div class="view-toggle">
+    <button data-view="grid">Grid View</button>
+    <button data-view="map">Map View</button>
+  </div>
+
+  <div id="grid-view" class="content active">
+    <div class="grid" id="time-cards">
+      <!-- Time cards will be injected here -->
+    </div>
+  </div>
+
+  <div id="map-view" class="content">
+    <div id="map" class="map-container"></div>
+  </div>
+
+  <script>
+    const locations = [
+      { name: "Singapore", timeZone: "Asia/Singapore", lat: 1.3521, lon: 103.8198 },
+      { name: "Seattle", timeZone: "America/Los_Angeles", lat: 47.6062, lon: -122.3321 },
+      { name: "London", timeZone: "Europe/London", lat: 51.5074, lon: -0.1278 },
+      { name: "New York", timeZone: "America/New_York", lat: 40.7128, lon: -74.006 },
+      { name: "Tokyo", timeZone: "Asia/Tokyo", lat: 35.6895, lon: 139.6917 },
+      { name: "UTC", timeZone: "UTC", lat: 0, lon: 0 },
+    ];
+
+    const eventStart = new Date("2025-05-10T00:00:00+08:00"); // Midnight Singapore Time
+    const eventEnd = new Date("2025-05-10T00:00:00-07:00"); // Midnight Seattle Time
+
+    const timeCardsContainer = document.getElementById("time-cards");
+    const eventTimer = document.getElementById("event-timer");
+
+    function updateTimes() {
+      const now = new Date();
+      timeCardsContainer.innerHTML = "";
+      locations.forEach((loc) => {
+        const localTime = new Intl.DateTimeFormat("en-US", {
+          timeZone: loc.timeZone,
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: false,
+        }).format(now);
+
+        const utcTime = new Intl.DateTimeFormat("en-US", {
+          timeZone: "UTC",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: false,
+        }).format(now);
+
+        const offset = new Date().toLocaleTimeString("en-us", {
+          timeZone: loc.timeZone,
+          timeZoneName: "short",
+        }).split(" ").pop();
+
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <h3>${loc.name}</h3>
+          <p><strong>Local Time:</strong> ${localTime}</p>
+          <p><strong>UTC Time:</strong> ${utcTime}</p>
+          <p><strong>UTC Offset:</strong> ${offset}</p>
+        `;
+        timeCardsContainer.appendChild(card);
+      });
+
+      // Update event timer
+      if (now < eventStart) {
+        const diff = eventStart - now;
+        eventTimer.textContent = `Event starts in: ${formatDuration(diff)}`;
+      } else if (now >= eventStart && now <= eventEnd) {
+        const diff = eventEnd - now;
+        eventTimer.textContent = `Event ends in: ${formatDuration(diff)}`;
+      } else {
+        eventTimer.textContent = "The event has ended.";
+      }
+    }
+
+    function formatDuration(ms) {
+      const totalSeconds = Math.floor(ms / 1000);
+      const hours = Math.floor(totalSeconds / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+      return `${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    // Theme toggle
+    const themeToggle = document.getElementById("theme-toggle");
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+    });
+
+    // View toggle
+    const viewButtons = document.querySelectorAll(".view-toggle button");
+    const contents = document.querySelectorAll(".content");
+    viewButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        contents.forEach((content) => content.classList.remove("active"));
+        document.getElementById(`${btn.dataset.view}-view`).classList.add("active");
+      });
+    });
+
+    // Initialize map
+    function initMap() {
+      const mapDiv = document.getElementById("map");
+      if (!mapDiv) return;
+      const script = document.createElement("script");
+      script.src = "https://unpkg.com/leaflet@1.7.1/dist/leaflet.js";
+      script.onload = () => {
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = "https://unpkg.com/leaflet@1.7.1/dist/leaflet.css";
+        document.head.appendChild(link);
+
+        const map = L.map("map").setView([20, 0], 2);
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          attribution: '&copy; OpenStreetMap contributors',
+        }).addTo(map);
+
+        locations.forEach((loc) => {
+          const marker = L.marker([loc.lat, loc.lon]).addTo(map);
+          marker.bindPopup(`<strong>${loc.name}</strong><br>Time Zone: ${loc.timeZone}`);
+        });
+      };
+      document.body.appendChild(script);
+    }
+
+    initMap();
+    updateTimes();
+    setInterval(updateTimes, 1000);
+  </script>
+</body>
+</html>

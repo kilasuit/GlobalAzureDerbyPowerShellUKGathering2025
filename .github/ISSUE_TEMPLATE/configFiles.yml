@@ -1,0 +1,67 @@
+name: Repostiory ⚙️ Config Files
+description: File a issue about New/ out of date config or docs in this repo
+title: "⚙️ Config or 📖 Docs need updated: "
+labels: ["Config-or-Docs-OutDated"]
+assignees:
+  - kilasuit
+body:
+- type: checkboxes
+  attributes:
+    label: Is there an existing issue for this?
+    description: Please search to see if an issue already exists for the bug you encountered.
+    options:
+    - label: I have searched the existing issues
+      required: true
+- type: dropdown
+  id: config-files
+  attributes:
+    label: Is this for a new or existing config file?
+    options:
+    - "New"
+    - "Existing"
+    - "Both"
+  validations:
+    required: true
+- type: textarea
+  id: OutdatedConfigFiles
+  attributes:
+    label: Summary
+    description: File path/s for outdated Config Files
+    placeholder: |
+      Config file at <path> is outdated
+  validations:
+    required: false
+    # if: adr-docs, "Existing", "Both" // if the user selects "Existing" or "Both", this field is required buut this syntax is not supported in the current version of GitHub issues template from what I could tell.
+    # Also annoyingly I wanted to use checkboxes for this but it doesn't seem to work as I would expect - this is a todo for the future under issue #18
+- type: checkboxes
+  attributes:
+    label: Suggested Updates
+    description: What needs updating in these files.
+    options:
+    - label: "Config File needs additional properties"
+    - label: "Config syntax has been updated and new features are available"
+- type: textarea
+  attributes:
+    label: Suggested Updates
+    description: Describe what needs updating in these files.
+    placeholder: |
+      Please detail what needs updating in these files.
+  validations:
+    required: true
+- type: textarea
+  attributes:
+    label: Anything else?
+    description: |
+      Any other comments
+  validations:
+    required: false
+- type: dropdown
+  attributes:
+    label: Intend to contribute this work?
+    description: Intend to contribute this work?
+    options:
+    - "Yes, I intend to contribute this work & do not require any assistance"
+    - "Yes, I intend to contribute this work & but would like some assistance"
+    - "No, I do not intend to contribute this work"
+  validations:
+    required: true

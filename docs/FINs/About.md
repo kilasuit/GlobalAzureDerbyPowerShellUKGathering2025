@@ -1,0 +1,5 @@
+# FINs
+
+I dont expect there will be many FINs for this project, However do feel free to leave me one, particulary if you have looked at or worked with this project.
+
+Please do so in a folder of your own using your username for the folder name. This is because we will add you as a codeowner to that folder, ensuring you get notified of any changes that others may makke of your contributions

@@ -1,0 +1,61 @@
+name: 📖 Other Repo Doc or Update needed
+description: Tracking when we need either a new doc in the repo or update an existing one
+title: "📖 Repo Docs need adding or updated: "
+labels: ["Config-or-Docs-OutDated"]
+projects: ["kilasuit-other-repos"]
+assignees:
+  - kilasuit #by default this is assigned to me, however intend on adding automation to assign this detailed in template - This also could be assigned to a team intead
+body:
+- type: checkboxes
+  attributes:
+    label: Is there an existing issue for this?
+    description: Please search to see if an issue already exists for the bug you encountered.
+    options:
+    - label: I have searched the existing issues
+      required: true
+- type: dropdown
+  id: repo-docs
+  attributes:
+    label: Is this for a new or existing Repo Doc?
+    options:
+    - "New"
+    - "Existing"
+    - "Both"
+  validations:
+    required: true
+- type: textarea
+  id: OutdatedRepoDocs
+  attributes:
+    label: Summary
+    description: File path/s for outdated Repo Docs
+    placeholder: |
+      Doc file at <path> is outdated
+  validations:
+    required: false
+    # if: adr-docs, "Existing", "Both" // if the user selects "Existing" or "Both", this field is required buut this syntax is not supported in the current version of GitHub issues template from what I could tell.
+    # Also annoyingly I wanted to use checkboxes for this but it doesn't seem to work as I would expect - this is a todo for the future under issue #18
+- type: textarea
+  attributes:
+    label: Suggested Updates
+    description: What needs updating in these files.
+    placeholder: |
+      [] - Doc is missing key references & links need updating to new locations
+  validations:
+    required: true
+- type: textarea
+  attributes:
+    label: Anything else?
+    description: |
+      Any other comments
+  validations:
+    required: false
+- type: dropdown
+  attributes:
+    label: Intend to contribute this work?
+    description: Intend to contribute this work?
+    options:
+    - "Yes, I intend to contribute this work & do not require any assistance"
+    - "Yes, I intend to contribute this work & but would like some assistance"
+    - "No, I do not intend to contribute this work"
+  validations:
+    required: true

@@ -1,0 +1,43 @@
+name: 📖New FIN
+description: This issue is for tracking when someone has either added or intends to add a FIN to this repo
+title: "📖 New FIN: "
+# labels: ["Config-or-Docs-OutDated"] Update this in later PR when we have a label for this issue type
+body:
+- type: dropdown
+  attributes:
+    label: Is this for a new or existing FIN Doc?
+    options:
+    - "New"
+    - "Existing"
+    - "Both"
+  validations:
+    required: true
+- type: textarea
+  id: FINDocPath
+  attributes:
+    label: Summary
+    description: Path where FIN Doc has been or will be published
+    placeholder: |
+       Please provide a path where the FIN has been or will be published
+       This can be a file path in this Repo (like /Docs/FINs/<user/team>/<FIN-ID>), or a URL to a file in another Repo or published article on a blog website.
+       Optionally/Additionally/Instead you could record a video where you detail your FINs and provide a link to that. 
+  validations:
+    required: true
+- type: textarea
+  attributes:
+    label: Assignee?
+    description: |
+      Who should this issue be assigned to?
+      Ideally this should be the person who is responsible for the FIN Doc or the person who will be doing the work to add the FIN.
+      If you are not sure, please put Unknown or N/A and we can assign it to the right person later.
+      This helps make work both visible and trackable & we can add protections in our code too
+  validations:
+    required: true
+- type: textarea
+  attributes:
+    label: Target Completion Date?
+    description: |
+      If a "I/We intend to add an FIN" please provide a target date for when you expect to have this completed by.
+      This allows us to build other automation around this, like a reminder comment in this issue or move the issue on any associated tracking boards, like GitHub projects, Trello, Azure Boards etc.
+  validations:
+    required: true

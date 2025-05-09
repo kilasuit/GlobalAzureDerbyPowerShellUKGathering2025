@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Global Event Time Tracker</title>
+  <title>Derby PowerShell UK & Global Azure Gathering 2025</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
@@ -94,18 +94,40 @@
 </head>
 <body>
   <header>
-    <h1>Global Event Time Tracker</h1>
-    <div class="event-timer" id="event-timer">Calculating event time...</div>
+    <!-- Add background image of the UK PS logo here -->
+    <!-- Add this to have a block background or white text depending on how it looks / fix accessibilty colouring for links -->
+     <!-- Fix so uses system theme first  -->
+    <!-- Add a lookup for system time & show this with a highlighted box that matches TZ  -->
+     <!-- Add Countries as well to the boxes -->
+      <!-- Ideally re-add map option but it wasn't working like i'd like it -->
+       <!-- Optionally add a Miles from you section in the boxes -->
+    <h1>Derby PowerShell UK & Global Azure Gathering 2025</h1>
+    <div class="event-timer-start" id="event-timer-start">Calculating event time...</div>
+    <div>
+      <p></p>
+    </div>
+    <div class="">
+      <p>
+        <a href="https://github.com/users/kilasuit/projects/16/views/2">The Schedule is available here</a> 
+      </p>
+      <p>
+        <a href="https://github.com/kilasuit/GlobalAzureDerbyPowerShellUKGathering2025">Click here to see the Repository behind this event</a>
+      </p>
+      <p>
+        <a href="https://blog.kilasuit.org/2025/04/30/announcing-globalazurederbypowershell2025gathering/"
+        >The Blog post announcing this this event was published here</a>
+      </p>
+    </div>
+    <div>
+      <p></p>
+    </div>
+    <div class="event-timer-end" id="event-timer-end">Calculating event time...</div>
   </header>
 
   <div class="toggle-container">
     <button id="theme-toggle">Toggle Dark/Light Mode</button>
   </div>
 
-  <div class="view-toggle">
-    <button data-view="grid">Grid View</button>
-    <button data-view="map">Map View</button>
-  </div>
 
   <div id="grid-view" class="content active">
     <div class="grid" id="time-cards">
@@ -113,25 +135,57 @@
     </div>
   </div>
 
-  <div id="map-view" class="content">
-    <div id="map" class="map-container"></div>
-  </div>
 
   <script>
-    const locations = [
-      { name: "Singapore", timeZone: "Asia/Singapore", lat: 1.3521, lon: 103.8198 },
-      { name: "Seattle", timeZone: "America/Los_Angeles", lat: 47.6062, lon: -122.3321 },
-      { name: "London", timeZone: "Europe/London", lat: 51.5074, lon: -0.1278 },
-      { name: "New York", timeZone: "America/New_York", lat: 40.7128, lon: -74.006 },
-      { name: "Tokyo", timeZone: "Asia/Tokyo", lat: 35.6895, lon: 139.6917 },
-      { name: "UTC", timeZone: "UTC", lat: 0, lon: 0 },
+     const locations = [
+      { name: "Baker Island", timeZone: "Etc/GMT+12", lat: 0, lon: -176.5 },
+      { name: "American Samoa", timeZone: "Pacific/Pago_Pago", lat: -14.3, lon: -170.7 },
+      { name: "Honolulu", timeZone: "Pacific/Honolulu", lat: 21.3, lon: -157.8 },
+      { name: "Anchorage", timeZone: "America/Anchorage", lat: 61.2, lon: -149.9 },
+      { name: "Marquesas Islands", timeZone: "Pacific/Marquesas", lat: -9, lon: -139 },
+      { name: "Gambier Islands", timeZone: "Pacific/Gambier", lat: -23.1, lon: -134.9 },
+      { name: "Los Angeles", timeZone: "America/Los_Angeles", lat: 34.05, lon: -118.25 },
+      { name: "Denver", timeZone: "America/Denver", lat: 39.74, lon: -104.99 },
+      { name: "Chicago", timeZone: "America/Chicago", lat: 41.88, lon: -87.63 },
+      { name: "New York", timeZone: "America/New_York", lat: 40.71, lon: -74.01 },
+      { name: "Caracas", timeZone: "America/Caracas", lat: 10.48, lon: -66.9 },
+      { name: "Halifax", timeZone: "America/Halifax", lat: 44.65, lon: -63.57 },
+      { name: "St. John's", timeZone: "America/St_Johns", lat: 47.56, lon: -52.71 },
+      { name: "South Georgia", timeZone: "Atlantic/South_Georgia", lat: -54.27, lon: -36.5 },
+      { name: "Azores", timeZone: "Atlantic/Azores", lat: 37.74, lon: -25.67 },
+      { name: "London", timeZone: "Europe/London", lat: 51.51, lon: -0.13 },
+      { name: "Berlin", timeZone: "Europe/Berlin", lat: 52.52, lon: 13.41 },
+      { name: "Cairo", timeZone: "Africa/Cairo", lat: 30.04, lon: 31.24 },
+      { name: "Moscow", timeZone: "Europe/Moscow", lat: 55.75, lon: 37.62 },
+      { name: "Tehran", timeZone: "Asia/Tehran", lat: 35.69, lon: 51.39 },
+      { name: "Dubai", timeZone: "Asia/Dubai", lat: 25.2, lon: 55.27 },
+      { name: "Kabul", timeZone: "Asia/Kabul", lat: 34.53, lon: 69.17 },
+      { name: "Karachi", timeZone: "Asia/Karachi", lat: 24.86, lon: 67.01 },
+      { name: "Delhi", timeZone: "Asia/Kolkata", lat: 28.61, lon: 77.21 },
+      { name: "Kathmandu", timeZone: "Asia/Kathmandu", lat: 27.71, lon: 85.32 },
+      { name: "Dhaka", timeZone: "Asia/Dhaka", lat: 23.81, lon: 90.41 },
+      { name: "Yangon", timeZone: "Asia/Yangon", lat: 16.85, lon: 96.17 },
+      { name: "Bangkok", timeZone: "Asia/Bangkok", lat: 13.75, lon: 100.5 },
+      { name: "Beijing", timeZone: "Asia/Shanghai", lat: 39.91, lon: 116.4 },
+      { name: "Eucla", timeZone: "Australia/Eucla", lat: -31.72, lon: 128.89 },
+      { name: "Tokyo", timeZone: "Asia/Tokyo", lat: 35.68, lon: 139.76 },
+      { name: "Adelaide", timeZone: "Australia/Adelaide", lat: -34.93, lon: 138.6 },
+      { name: "Sydney", timeZone: "Australia/Sydney", lat: -33.87, lon: 151.21 },
+      { name: "Lord Howe Island", timeZone: "Australia/Lord_Howe", lat: -31.55, lon: 159.08 },
+      { name: "Noumea", timeZone: "Pacific/Noumea", lat: -22.27, lon: 166.45 },
+      { name: "Auckland", timeZone: "Pacific/Auckland", lat: -36.85, lon: 174.76 },
+      { name: "Chatham Islands", timeZone: "Pacific/Chatham", lat: -43.95, lon: -176.56 },
+      { name: "Apia", timeZone: "Pacific/Apia", lat: -13.83, lon: -171.77 },
+      { name: "Kiritimati", timeZone: "Pacific/Kiritimati", lat: 1.87, lon: -157.42 }
     ];
+
 
     const eventStart = new Date("2025-05-10T00:00:00+08:00"); // Midnight Singapore Time
     const eventEnd = new Date("2025-05-10T00:00:00-07:00"); // Midnight Seattle Time
 
     const timeCardsContainer = document.getElementById("time-cards");
-    const eventTimer = document.getElementById("event-timer");
+    const eventTimerStart = document.getElementById("event-timer-start");
+    const eventTimerEnd = document.getElementById("event-timer-end");
 
     function updateTimes() {
       const now = new Date();
@@ -172,10 +226,15 @@
       // Update event timer
       if (now < eventStart) {
         const diff = eventStart - now;
-        eventTimer.textContent = `Event starts in: ${formatDuration(diff)}`;
-      } else if (now >= eventStart && now <= eventEnd) {
+        eventTimerStart.textContent = `Event starts in: ${formatDuration(diff)}`;
+      } else if (now >= eventStart ) {
+        eventTimerStart.textContent = `This Event is ALIVE!!!!!!!!!`;
+      } else if (now >= eventEnd) {
+        eventTimerStart.textContent = `Sadly you missed the Live event, but follow the repository do`
+      }
+      if (now <= eventEnd) {
         const diff = eventEnd - now;
-        eventTimer.textContent = `Event ends in: ${formatDuration(diff)}`;
+        eventTimerEnd.textContent = `Event ends in: ${formatDuration(diff)}`;
       } else {
         eventTimer.textContent = "The event has ended.";
       }

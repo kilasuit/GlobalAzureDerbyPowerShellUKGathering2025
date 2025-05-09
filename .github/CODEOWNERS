@@ -1,4 +1,54 @@
-# Auto-include these teams/individuals on all PRs.
-* @kilasuit
+# https://help.github.com/articles/about-codeowners/
 
+# Auto-include these teams/individuals on all PRs.
+# * @kilasuit
+
+pages/*  @kilasuit
+
+docs/* @kilasuit
+
+docs/IINs/kilasuit/*    @kilasuit
+docs/DINs/kilasuit/*    @kilasuit
+docs/FINs/kilasuit/*    @kilasuit
+
+
+sessions/hour-1/*        @kilasuit,@mhaslme-ry
+sessions/hour-2/*        @kilasuit,@mhaslme-ry
+sessions/hour-3/*        @kilasuit,@mhaslme-ry
+sessions/hour-4/*        @kilasuit,@mhaslme-ry
+sessions/hour-5/*        @kilasuit,@mhaslme-ry
+sessions/hour-6/*        @kilasuit,@mhaslme-ry
+sessions/hour-7/*        @kilasuit,@mhaslme-ry
+sessions/hour-8/*        @kilasuit,@mhaslme-ry
+sessions/hour-9/*        @kilasuit,@mhaslme-ry
+sessions/hour-10/*        @kilasuit,@mhaslme-ry
+sessions/hour-11/*        @kilasuit,@mhaslme-ry
+sessions/hour-12/*        @kilasuit,@mhaslme-ry
+sessions/hour-13/*        @kilasuit,@mhaslme-ry
+sessions/hour-14/*        @kilasuit,@mhaslme-ry
+sessions/hour-15/*        @kilasuit,@mhaslme-ry
+sessions/hour-16/*        @kilasuit,@mhaslme-ry
+sessions/hour-17/*        @kilasuit,@mhaslme-ry
+sessions/hour-18/*        @kilasuit,@mhaslme-ry
+sessions/hour-19/*        @kilasuit,@mhaslme-ry
+sessions/hour-20/*        @kilasuit,@mhaslme-ry
+sessions/hour-21/*        @kilasuit,@mhaslme-ry
+sessions/hour-22/*        @kilasuit,@mhaslme-ry
+sessions/hour-23/*        @kilasuit,@mhaslme-ry
+sessions/hour-24/*        @kilasuit,@mhaslme-ry
+sessions/hour-25/*        @kilasuit,@mhaslme-ry
+sessions/hour-26/*        @kilasuit,@mhaslme-ry
+sessions/hour-27/*        @kilasuit,@mhaslme-ry
+sessions/hour-28/*        @kilasuit,@mhaslme-ry
+sessions/hour-29/*        @kilasuit,@mhaslme-ry
+sessions/hour-30/*        @kilasuit,@mhaslme-ry
+sessions/hour-31/*        @kilasuit,@mhaslme-ry
+sessions/hour-32/*        @kilasuit,@mhaslme-ry
+sessions/hour-33/*        @kilasuit,@mhaslme-ry
+sessions/hour-34/*        @kilasuit,@mhaslme-ry
+sessions/hour-35/*        @kilasuit,@mhaslme-ry
+sessions/hour-36/*        @kilasuit,@mhaslme-ry
+sessions/hour-37/*        @kilasuit,@mhaslme-ry
+sessions/hour-38/*        @kilasuit,@mhaslme-ry
+sessions/hour-39/*        @kilasuit,@mhaslme-ry
 <!-- #@org/maintainers -->

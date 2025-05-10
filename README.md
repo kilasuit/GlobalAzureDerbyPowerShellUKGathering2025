@@ -1,5 +1,7 @@
 # GlobalAzureDerbyPowerShellUKGathering2025
 
+## POSTPONED DUE TO TECH ISSUES
+
 Used for managing the Derby PowerShell UK & Global Azure Gathering 2025
 
 for more info read the RepoCreationProcess doc in the docs folder

@@ -95,8 +95,9 @@
 <body>
   <header>
     <div class="view-toggle">
-      <button data-view="grid">Grid View</button>
-      <button data-view="map">Map View</button>
+      <button data-view="grid">Grid Of TimeZones View</button>
+      <button data-view="nogrid">No TimeZones View</button>
+      <!--<button data-view="map">Map View</button>  -->
     </div>
     <div class="toggle-container">
       <button id="theme-toggle">Toggle Dark/Light Mode</button>
@@ -112,8 +113,10 @@
     <!-- Pull some of this from a config file instead of hardcoding it!!!! -->
     <h1>Derby PowerShell UK & Global Azure Gathering 2025</h1>
     <h2>May 16th - May 18th 2025</h2>
-    <h3>Whilst not affiliated with <a href="https://register.build.microsoft.com">Microsoft Build</a>, you could call this a "pre-Build" Event</h2>
-    <h4>The main part of this event has been Postponed until May 16th - due to tech issues!</h3>
+    <h3>Whilst not affiliated with <a href="https://register.build.microsoft.com">Microsoft Build</a>, you could call this a "pre-Build" Event</h3>
+    <h4>This was scheduled for May 9th-11th, but has been Postponed until May 16th - due to tech issues!</h4>
+    <h6><a href="https://blog.kilasuit.org/2025/05/10/din-delayed-derbyps-glbaz/">Read this post for more details</a></h6>
+    <h5>We are looking for speakers, sponsors and volunteers to help make this event a success!</h5>
     <p>
       Checkout this <a href="https://www.youtube.com/playlist?list=PLAP7lc7xFjex8Qt-rgJU-Tuv2mvjvBULt"> YouTube playlist</a> for delivered at this event.
     </p>  
@@ -211,8 +214,8 @@
     ];
 
 
-    const eventStart = new Date("2025-05-10T09:00:00+01:00"); // 9am UK Time
-    const eventEnd = new Date("2025-05-11T00:00:00-07:00"); // Midnight Seattle Time
+    const eventStart = new Date("2025-05-16T00:00:00+08:00"); // Midnight Singapore Time
+    const eventEnd = new Date("2025-05-18T00:00:00-07:00"); // Midnight Seattle Time
 
     const timeCardsContainer = document.getElementById("time-cards");
     const eventTimerStart = document.getElementById("event-timer-start");
